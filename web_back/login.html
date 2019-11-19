@@ -25,15 +25,56 @@
                 <i class="iconfont icon-key"></i>
                 <input type="text" class="input_txt" placeholder="邮箱/手机号">
                 <input type="password" class="input_pass" placeholder="密码">
-                <input type="submit" class="input_sub" value="登 录">
+                <input type="button" class="input_sub" value="登 录">
             </form>
         </div>
 
     </div>
     <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/user.js"></script>
+    <!-- <script>
+        var user = {
+            login: function(myname, mypassword, callback) {
+                $.post('http://localhost:8000/admin/login', {
+                    user_name: myname,
+                    password: mypassword
+                }, function(res) {
+                    // console.log(res);
+                    callback(res);
+                })
+            }
+        }
+    </script> -->
     <script>
-        var myname = $('.inPut_txt').val().trim()
-        var mypassword = $('input_pass').val().trim()
+        $('.input_sub').click(function() {
+
+            var myname = $('.input_txt').val().trim()
+            var mypassword = $('.input_pass').val().trim()
+            if (myname == '' || mypassword == '') {
+                alert('不能为空')
+                return
+            }
+            user.login(myname, mypassword, function(res) {
+                if (res.code == 200) {
+                    location.href = './index.html'
+                } else {
+                    alert('账号密码错误')
+                }
+            });
+
+            // $.post('http://localhost:8000/admin/login', {
+            //     user_name: myname,
+            //     password: mypassword
+            // }, function(res) {
+            //     console.log(res);
+            //     if (res.code == 200) {
+            //         location.href = './index.html'
+            //     } else {
+            //         alert('账号密码错误')
+            //     }
+            // })
+
+        })
     </script>
 </body>
 
