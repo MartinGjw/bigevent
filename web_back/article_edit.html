@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="js/jedate/css/jedate.css">
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/jedate/js/jedate.js"></script>
-    <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
-    <script src="js/tinymce/js/tinymce_setup.js"></script>
+
 </head>
 
 <body>
@@ -27,25 +24,25 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" value="文章标题文字">
+                        <input type="email" class="form-control" id="inputEmail3" name="title" value="文章标题文字">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
                     <div class="col-sm-10">
                         <img src="images/pic06.jpg" class="article_cover">
-                        <input type="file" id="exampleInputFile">
+                        <input type="file" id="exampleInputFile" name="cover">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
-                            <option>类别一</option>
+                        <select class="form-control" name="type" id="selectem">
+                            <!-- <option>类别一</option>
                             <option>类别二</option>
                             <option>类别三</option>
                             <option selected>类别四</option>
-                            <option>类别五</option>
+                            <option>类别五</option> -->
                         </select>
                     </div>
                 </div>
@@ -54,7 +51,7 @@
                     <div class="col-sm-4">
 
                         <div class="input-group">
-                            <input type="text" class="form-control" value="2019-05-17" id="dateinput">
+                            <input type="text" class="form-control" value="2019-05-17" id="dateinput" name="date">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"
                                     onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
@@ -77,7 +74,53 @@
             </form>
         </div>
     </div>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/jedate/js/jedate.js"></script>
+    <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="js/tinymce/js/tinymce_setup.js"></script>
+    <script src="./js/utils/url.js"></script>
+    <script src="./js/utils/article.js"></script>
+    <script src="./js/template-web.js"></script>
+    <script src="./js/utils/category.js"></script>
+    <script type="text/html" id="sete">
+        {{each data item}}
+        <option value={{item.id}}>{{item.name}}</option>
+        {{/each}}
+    </script>
+    <script>
+        //显示
+        var id = location.search.substr(4);
+        article.getdetail(id, function(res) {
+                console.log(res);
+                var id = res.data.type
 
+                // $('#selectem').val(id)
+                $('#inputEmail3').val(res.data.title)
+                $('.article_cover').prop('src', res.data.cover)
+                $('#dateinput').val(res.data.date)
+                $('#rich_content').val(res.data.content)
+
+                category.show(function(res) {
+
+                    var htmlStr = template('sete', res)
+                    $('#selectem').html(htmlStr)
+                    $('#selectem').val(id)
+                })
+            })
+            //编辑
+        $('.btn-success').click(function() {
+            var fd = new FormData(document.querySelector('.article_form'))
+            fd.append('id', id)
+            fd.set('content', tinyMCE.activeEditor.getContent())
+            article.edit(fd, function(res) {
+                if (res.code == 200) {
+                    alert('修改成功')
+                } else {
+                    alert('修改失败')
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

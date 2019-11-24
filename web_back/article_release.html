@@ -89,12 +89,17 @@
     <script src="./js/utils/article.js"></script>
     <script type="text/html" id="cateo">
         {{each data item}}
-        <option value='{{item.id}}'>{{item.id}}</option>
+        <option value='{{item.id}}'>{{item.name}}</option>
         {{/each}}
     </script>
     <script>
+        //下拉显示
         category.show(function(res) {
+            console.log(res);
+
             var htmlStr = template('cateo', res);
+            console.log(htmlStr);
+
             if (res.code == 200) {
                 $('.form-control').html(htmlStr)
             } else {
@@ -102,19 +107,25 @@
             }
         })
 
-
+        //添加
 
         $('.btn-success').click(function() {
                 var fd = new FormData(document.querySelector('.article_form'));
-                fd.appened('state', '已发布')
+                fd.append('state', '已发布')
                 fd.set('content', tinyMCE.activeEditor.getContent())
                 article.add(fd, function(res) {
-
+                    if (res.code === 201) {
+                        alert('添加成功')
+                    } else {
+                        alert(res.msg)
+                    }
                 })
             })
             //图片预览
         $('#exampleInputFile').change(function() {
-            var file = this.file[0];
+            console.dir(this);
+
+            var file = this.files[0];
             if (file) {
                 var url = URL.createObjectURL(file);
                 $('#preview').prop('src', url);

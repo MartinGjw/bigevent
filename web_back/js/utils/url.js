@@ -20,5 +20,13 @@ var titleurl = {
     //删除文章
     delarticle: url + 'admin/article_delete',
     //发布文章
-    addarticle: url + 'admin/article_publish'
+    addarticle: url + 'admin/article_publish',
+    //编辑文章
+    editarticle: url + 'admin/article_edit',
+
+    //月度新增文章数
+    countarticle: url + 'admin/month_article_count',
+    //前台发表评论
+    // post_comment:url+'post_comment',
+
 }

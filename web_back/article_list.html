@@ -98,7 +98,7 @@
             <td class="text-center">{{item.date}}</td>
             <td class="text-center">{{item.state}}</td>
             <td class="text-center">
-                <a href="post-edit.html?id=998" class="btn btn-default btn-xs">编辑</a>
+                <a href="./article_edit.html?id={{item.id}}" class="btn btn-default btn-xs">编辑</a>
                 <a href="javascript:;" data_id={{item.id}} class="btn btn-danger btn-xs">删除</a>
             </td>
         </tr>
@@ -163,12 +163,16 @@
 
         //删除
         $('#table_r').on('click', '.btn-danger', function() {
-            var id = $(this).attr('data_id')
-            article.del(id, function() {
-                if (res.code == 200) {
-                    searchanshow();
-                }
+                var id = $(this).attr('data_id')
+                article.del(id, function(res) {
+                    if (res.code == 200) {
+                        searchanshow();
+                    }
+                })
             })
+            //编辑
+        $('#table_r').on('click', '.btn-default', function() {
+
         })
     </script>
 </body>
