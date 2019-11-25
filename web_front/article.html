@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
 
 <body>
@@ -59,14 +60,13 @@
                 当前位置： <a href="#">首页</a> &gt; <a href="#">科技</a> &gt; 文章详情
             </div>
             <h3 class="article_title">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</h3>
-            <div class="article_info">杰克 发布于 2019-05-08 07:08:46&nbsp;&nbsp;&nbsp;分类: 奇趣事&nbsp;&nbsp;&nbsp;阅读:
-                (98)&nbsp;&nbsp;&nbsp;评论: (0)</div>
+            <div class="article_info"><span id="at_name">杰克</span> 发布于<span id="at_time">2019-05-08 07:08:46</span> &nbsp;&nbsp;&nbsp;分类:<span id="at_type">奇趣事</span>&nbsp;&nbsp;&nbsp;阅读: (98)&nbsp;&nbsp;&nbsp;评论: (0)</div>
             <div class="article_con">
 
                 <p>“上天入地”还不够？硅谷“钢铁侠”马斯克名下一家低调的公司最近又融了一大笔钱。</p>
 
-                <p>马斯克投资的一家小型且不为人熟知的脑机接口（brain-computer
-                    interface）公司Neuralink披露，该公司融到了3900万美元，虽然不及公司计划的融资额5100万美元，但也比上次的融资多了不少。</p>
+                <p>马斯克投资的一家小型且不为人熟知的脑机接口（brain-computer interface）公司Neuralink披露，该公司融到了3900万美元，虽然不及公司计划的融资额5100万美元，但也比上次的融资多了不少。
+                </p>
 
                 <p>两年前该公司曾计划融资1亿美元，但只拿到了2700万美元的融资。</p>
 
@@ -76,8 +76,7 @@
 
             </div>
             <div class="article_links">
-                上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br>
-                下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a>
+                上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br> 下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a>
             </div>
 
             <form action="" class="comment_form">
@@ -90,7 +89,7 @@
                     <textarea placeholder="请发表您的评论" class="comment_input"></textarea>
                 </div>
                 <div class="form_group">
-                    <input type="submit" name="" value="评 论" class="comment_sub"></div>
+                    <input type="button" name="" value="评 论" class="comment_sub" id="comment_sub"></div>
             </form>
 
             <div class="comment_count">
@@ -98,7 +97,7 @@
             </div>
 
             <div class="comment_list_con">
-                <div class="comment_detail_list">
+                <!-- <div class="comment_detail_list">
                     <div class="person_pic fl">乔</div>
                     <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
                     <div class="comment_text fl">
@@ -125,7 +124,7 @@
                     <div class="comment_text fl">
                         遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="right_con setfl">
@@ -204,7 +203,89 @@
         <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
         <p>电话：0755-****888 粤ICP备*******8号</p>
     </div>
+    <script src="./js/dayjs/dayjs.min.js"></script>
+    <script src="./js/dayjs/relative.min.js"></script>
+    <script src="./js/dayjs/zh_cn.js"></script>
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/template-web.js"></script>
+    <script src="./js/utils/article.js"></script>
+    <script src="./js/utils/config.js"></script>
+    <script src="./js/utils/comment.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootbox.min.js"></script>
 
+    <script type="text/html" id="tempms">
+        {{each data item}}
+        <div class="comment_detail_list">
+            <div class="person_pic fl">{{item.name.substr(0,1)}}</div>
+            <div class="name_time fl"><b>{{item.name.substr(1)}}</b><span>{{item.relativeDt}}</span></div>
+            <div class="comment_text fl">
+                {{item.content}}
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script>
+        dayjs.extend(dayjs_plugin_relativeTime)
+            // dayjs设置语言
+        dayjs.locale('zh-cn')
+
+        var id = location.search.substr(4)
+        article.getDetil(id, function(res) {
+                // console.log(res);
+                $('.article_title').text(res.data.title)
+                $('#at_name').text(res.data.author)
+                $('#at_time').text(res.data.date)
+                $('.article_con').html(res.data.content)
+                var typeid = res.data.type
+                article.categ(function(res) {
+                    console.log(res);
+                    var rs = res.data.find(function(item) {
+                        if (typeid == item.id) {
+                            return true;
+                        }
+                    })
+                    if (rs) {
+                        $('#at_type').text(rs.name)
+                    }
+
+                })
+            })
+            //评论
+        $('#comment_sub').click(function() {
+            var name = $('.comment_name').val().trim()
+            var content = $('.comment_input').val().trim()
+            if (name == '' || content == '') {
+                //    bootBox.js来代替alert
+                bootbox.alert("不能为空");
+                // alert('不能为空'); //
+                return;
+            }
+            comment.pocom(name, content, id, function(res) {
+                console.log(res);
+                $('.comment_name').val('')
+                $('.comment_input').val('')
+                getandshow()
+            })
+        })
+
+
+
+        //获取评论
+        function getandshow() {
+
+            comment.gecom(id, function(res) {
+                res.data.reverse()
+                res.data.forEach(function(item) {
+                    item.relativeDt = dayjs(item.dt).toNow()
+                })
+
+                var htmlStr = template('tempms', res)
+                $('.comment_list_con').html(htmlStr)
+            })
+        }
+        getandshow()
+    </script>
 </body>
 
 </html>
