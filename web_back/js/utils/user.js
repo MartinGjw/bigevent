@@ -4,7 +4,7 @@ var user = {
     login: function(myname, mypassword, callback) {
         $.post(
             // url + 'admin/login'
-            titleurl.loginurl, {
+            TITLEURL.loginurl, {
                 user_name: myname,
                 password: mypassword
             },
@@ -16,7 +16,7 @@ var user = {
     logout: function(callback) {
         $.post(
             // url + 'admin/logout'
-            titleurl.logouturl,
+            TITLEURL.logouturl,
             function(res) {
                 // console.log(res);
                 callback(res)
@@ -25,7 +25,7 @@ var user = {
     infor: function(callback) {
         $.get(
             // url + 'admin/getuser'
-            titleurl.infofurl,
+            TITLEURL.infofurl,
             function(res) {
                 callback(res)
             })

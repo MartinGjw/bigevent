@@ -230,8 +230,8 @@
             // dayjs设置语言
         dayjs.locale('zh-cn')
 
-        var id = location.search.substr(4)
-        article.getDetil(id, function(res) {
+        let id = location.search.substr(4)
+        article.getDetil(id, res => {
                 // console.log(res);
                 $('.article_title').text(res.data.title)
                 $('#at_name').text(res.data.author)

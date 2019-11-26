@@ -47,15 +47,15 @@
         }
     </script> -->
     <script>
-        $('.input_sub').click(function() {
+        $('.input_sub').click(() => {
 
-            var myname = $('.input_txt').val().trim()
-            var mypassword = $('.input_pass').val().trim()
+            let myname = $('.input_txt').val().trim()
+            let mypassword = $('.input_pass').val().trim()
             if (myname == '' || mypassword == '') {
                 alert('不能为空')
                 return
             }
-            user.login(myname, mypassword, function(res) {
+            user.login(myname, mypassword, res => {
                 if (res.code == 200) {
                     location.href = './index.html'
                 } else {

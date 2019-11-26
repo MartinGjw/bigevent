@@ -1,7 +1,7 @@
 var category = {
     show: function(callback) {
         $.get(
-            titleurl.fontshowurl,
+            TITLEURL.fontshowurl,
             function(res) {
                 callback(res)
             }
@@ -9,7 +9,7 @@ var category = {
     },
     add: function(name, slug, callback) {
         $.post(
-            titleurl.fontaddurl, {
+            TITLEURL.fontaddurl, {
                 'name': name,
                 'slug': slug
             },
@@ -19,7 +19,7 @@ var category = {
         )
     },
     edit: function(id, name, slug, callback) {
-        $.post(titleurl.fontediturl, {
+        $.post(TITLEURL.fontediturl, {
                 'id': id,
                 'name': name,
                 'slug': slug
@@ -29,7 +29,7 @@ var category = {
             })
     },
     del: function(id, callback) {
-        $.post(titleurl.fontdelurl, {
+        $.post(TITLEURL.fontdelurl, {
             'id': id
         }, function(res) {
             callback(res);

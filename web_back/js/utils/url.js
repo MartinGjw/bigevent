@@ -1,31 +1,31 @@
-var url = 'http://localhost:8000/'
+const URL = 'http://localhost:8000/'
 
-var titleurl = {
-    loginurl: url + 'admin/login',
-    logouturl: url + 'admin/logout',
-    infofurl: url + 'admin/getuser',
+const TITLEURL = {
+    loginurl: URL + 'admin/login',
+    logouturl: URl + 'admin/logout',
+    infofurl: URl + 'admin/getuser',
     //文章类别搜索
-    fontshowurl: url + 'admin/category_search',
+    fontshowurl: URL + 'admin/category_search',
     //新增文章类别
-    fontaddurl: url + 'admin/category_add',
+    fontaddurl: URL + 'admin/category_add',
     //编辑文章类别
-    fontediturl: url + 'admin/category_edit',
+    fontediturl: URL + 'admin/category_edit',
     //删除文章类别
-    fontdelurl: url + 'admin/category_delete',
+    fontdelurl: URL + 'admin/category_delete',
 
 
     //文章搜索
-    searcharticle: url + 'admin/search',
+    searcharticle: URL + 'admin/search',
     // http://localhost:8000/admin/search
     //删除文章
-    delarticle: url + 'admin/article_delete',
+    delarticle: URl + 'admin/article_delete',
     //发布文章
-    addarticle: url + 'admin/article_publish',
+    addarticle: URL + 'admin/article_publish',
     //编辑文章
-    editarticle: url + 'admin/article_edit',
+    editarticle: URL + 'admin/article_edit',
 
     //月度新增文章数
-    countarticle: url + 'admin/month_article_count',
+    countarticle: URL + 'admin/month_article_count',
     //前台发表评论
     // post_comment:url+'post_comment',
 

@@ -1,6 +1,6 @@
 var article = {
     search: function(pageid, type, state, callback) {
-        $.get(titleurl.searcharticle, {
+        $.get(TITLEURL.searcharticle, {
                 page: pageid,
                 type: type,
                 state: state
@@ -10,13 +10,13 @@ var article = {
             })
     },
     del: function(id, callback) {
-        $.get(titleurl.delarticle, { 'id': id }, function(res) {
+        $.get(TITLEURL.delarticle, { 'id': id }, function(res) {
             callback(res);
         })
     },
     add: function(fd, callback) {
         $.ajax({
-            url: titleurl.addarticle,
+            url: TITLEURL.addarticle,
             type: 'post',
             data: fd,
             processData: false, // 不要让jquery去处理formdata数据
@@ -29,7 +29,7 @@ var article = {
     //编辑
     edit: function(fd, callback) {
         $.ajax({
-            url: titleurl.editarticle,
+            url: TITLEURL.editarticle,
             type: 'post',
             data: fd,
             processData: false, // 不要让jquery去处理formdata数据
@@ -41,7 +41,7 @@ var article = {
     },
     //文章详情
     getdetail: function(id, callback) {
-        $.get(titleurl.searcharticle, {
+        $.get(TITLEURL.searcharticle, {
             id: id
         }, function(res) {
             callback(res)
@@ -49,7 +49,7 @@ var article = {
     },
     //月度文章获取
     getmouth: function(callback) {
-        $.get(titleurl.countarticle, function(res) {
+        $.get(TITLEURL.countarticle, function(res) {
             callback(res)
         })
     }
