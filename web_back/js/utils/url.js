@@ -2,8 +2,8 @@ const URL = 'http://localhost:8000/'
 
 const TITLEURL = {
     loginurl: URL + 'admin/login',
-    logouturl: URl + 'admin/logout',
-    infofurl: URl + 'admin/getuser',
+    logouturl: URL + 'admin/logout',
+    infofurl: URL + 'admin/getuser',
     //文章类别搜索
     fontshowurl: URL + 'admin/category_search',
     //新增文章类别
@@ -18,7 +18,7 @@ const TITLEURL = {
     searcharticle: URL + 'admin/search',
     // http://localhost:8000/admin/search
     //删除文章
-    delarticle: URl + 'admin/article_delete',
+    delarticle: URL + 'admin/article_delete',
     //发布文章
     addarticle: URL + 'admin/article_publish',
     //编辑文章

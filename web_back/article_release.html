@@ -94,10 +94,10 @@
     </script>
     <script>
         //下拉显示
-        category.show(function(res) {
+        category.show(res => {
             console.log(res);
 
-            var htmlStr = template('cateo', res);
+            let htmlStr = template('cateo', res);
             console.log(htmlStr);
 
             if (res.code == 200) {
@@ -109,11 +109,11 @@
 
         //添加
 
-        $('.btn-success').click(function() {
-                var fd = new FormData(document.querySelector('.article_form'));
+        $('.btn-success').click(() => {
+                let fd = new FormData(document.querySelector('.article_form'));
                 fd.append('state', '已发布')
                 fd.set('content', tinyMCE.activeEditor.getContent())
-                article.add(fd, function(res) {
+                article.add(fd, res => {
                     if (res.code === 201) {
                         alert('添加成功')
                     } else {
@@ -125,9 +125,9 @@
         $('#exampleInputFile').change(function() {
             console.dir(this);
 
-            var file = this.files[0];
+            let file = this.files[0];
             if (file) {
-                var url = URL.createObjectURL(file);
+                let url = URL.createObjectURL(file);
                 $('#preview').prop('src', url);
             }
         })

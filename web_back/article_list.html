@@ -85,7 +85,7 @@
     <script src="./js/utils/category.js"></script>
     <script>
         // 设置左侧菜单
-        $('#release_btn').click(function() {
+        $('#release_btn').click(() => {
             window.parent.setMenu(1, 1);
         })
     </script>
@@ -113,16 +113,16 @@
     </script>
     <script>
         //显示
-        var pageid = '';
-        var type = '';
-        var state = '';
-        var pageold = '';
+        let pageid = '';
+        let type = '';
+        let state = '';
+        let pageold = '';
         searchanshow();
         //显示
         function searchanshow() {
-            article.search(pageid, type, state, function(res) {
+            article.search(pageid, type, state, res => {
                 // console.log(res);
-                var htmlStr = template('templeart', res)
+                let htmlStr = template('templeart', res)
 
                 $('#table_r').html(htmlStr)
                     //翻页
@@ -137,7 +137,7 @@
                     prev: '上一页',
                     next: '下一页',
                     last: '尾页',
-                    onPageClick: function(event, page) {
+                    onPageClick: (event, page) => {
                         console.log(event, page);
                         pageid = page
                         searchanshow();
@@ -147,13 +147,13 @@
         }
 
         //分类
-        category.show(function(res) {
-            var htmlStr = template('fenlei', res)
+        category.show(res => {
+            let htmlStr = template('fenlei', res)
             $('#selCategory').html(htmlStr)
         })
 
         //筛选
-        $('#btnSearch').click(function() {
+        $('#btnSearch').click(() => {
             type = $('#selCategory').val()
             state = $('#selStatus').val()
                 // console.log(type, state);
@@ -163,8 +163,8 @@
 
         //删除
         $('#table_r').on('click', '.btn-danger', function() {
-                var id = $(this).attr('data_id')
-                article.del(id, function(res) {
+                let id = $(this).attr('data_id')
+                article.del(id, res => {
                     if (res.code == 200) {
                         searchanshow();
                     }

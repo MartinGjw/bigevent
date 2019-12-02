@@ -183,9 +183,9 @@
         //显示
         function addandshow() {
 
-            category.show(function(res) {
+            category.show(res => {
                 console.log(res);
-                var htmlStr = template('categ', res);
+                let htmlStr = template('categ', res);
                 if (res.code == 200) {
                     $('.biaoge').html(htmlStr);
                 } else {
@@ -200,9 +200,9 @@
                 if (window.confirm('确定要删除吗?') == false) {
                     return
                 }
-                var delid = $(this).attr('data_id')
+                let delid = $(this).attr('data_id')
                 console.log(delid);
-                category.del(delid, function(res) {
+                category.del(delid, res => {
                     if (res.code == 200) {
                         addandshow();
                     } else {
@@ -212,13 +212,13 @@
                 })
             })
             //添加
-        $('#model_add ').click(function() {
-                var name = $('.type-name').val().trim()
-                var slug = $('.type-slug').val().trim()
+        $('#model_add ').click(() => {
+                let name = $('.type-name').val().trim()
+                let slug = $('.type-slug').val().trim()
                 if (name == ' ' || slug == ' ') {
                     return
                 }
-                category.add(name, slug, function(res) {
+                category.add(name, slug, res => {
                     console.log(res);
                     if (res.code == 200) {
                         addandshow();
@@ -232,9 +232,9 @@
             })
             //编辑
         $('.biaoge').on('click', '.btn-info', function() {
-            var id = $(this).attr('data_id')
-            var name = $(this).attr('data_name')
-            var slug = $(this).attr('data_slug')
+            let id = $(this).attr('data_id')
+            let name = $(this).attr('data_name')
+            let slug = $(this).attr('data_slug')
             if (name == ' ' || slug == ' ') {
                 return
             }
@@ -244,13 +244,13 @@
             $('#recipient-edit-slug').val(slug)
         })
 
-        $('#model_save').click(function() {
-            var id = $('#cate-edit-id').val().trim()
-            var name = $('#recipient-edit-name').val().trim()
-            var slug = $('#recipient-edit-slug').val().trim()
+        $('#model_save').click(() => {
+            let id = $('#cate-edit-id').val().trim()
+            let name = $('#recipient-edit-name').val().trim()
+            let slug = $('#recipient-edit-slug').val().trim()
 
             console.log(id, name, slug);
-            category.edit(id, name, slug, function(res) {
+            category.edit(id, name, slug, res => {
                 // console.log(res);
                 if (res.code == 200) {
                     $('#editModal').modal('hide');

@@ -89,10 +89,10 @@
     </script>
     <script>
         //显示
-        var id = location.search.substr(4);
-        article.getdetail(id, function(res) {
+        let id = location.search.substr(4);
+        article.getdetail(id, res => {
                 console.log(res);
-                var id = res.data.type
+                let id = res.data.type
 
                 // $('#selectem').val(id)
                 $('#inputEmail3').val(res.data.title)
@@ -100,19 +100,19 @@
                 $('#dateinput').val(res.data.date)
                 $('#rich_content').val(res.data.content)
 
-                category.show(function(res) {
+                category.show(res => {
 
-                    var htmlStr = template('sete', res)
+                    let htmlStr = template('sete', res)
                     $('#selectem').html(htmlStr)
                     $('#selectem').val(id)
                 })
             })
             //编辑
         $('.btn-success').click(function() {
-            var fd = new FormData(document.querySelector('.article_form'))
+            let fd = new FormData(document.querySelector('.article_form'))
             fd.append('id', id)
             fd.set('content', tinyMCE.activeEditor.getContent())
-            article.edit(fd, function(res) {
+            article.edit(fd, res => {
                 if (res.code == 200) {
                     alert('修改成功')
                 } else {

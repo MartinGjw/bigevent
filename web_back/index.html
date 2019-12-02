@@ -109,15 +109,15 @@
     <script src="./js/utils/url.js"></script>
     <script>
         //获取用户信息 
-        user.infor(function(res) {
+        user.infor(res => {
                 console.log(res);
 
                 $('.userImg').prop('src', res.data.user_pic)
                 $('.usname').text(res.data.nickname)
             })
             //退出
-        $("#exit").click(function() {
-            user.logout(function(res) {
+        $("#exit").click(() => {
+            user.logout(res => {
                 if (res.code == 200) {
                     location.href = './login.html'
                 }

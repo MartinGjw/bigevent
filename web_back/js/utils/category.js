@@ -1,37 +1,37 @@
-var category = {
-    show: function(callback) {
+let category = {
+    show: callback => {
         $.get(
             TITLEURL.fontshowurl,
-            function(res) {
+            res => {
                 callback(res)
             }
         )
     },
-    add: function(name, slug, callback) {
+    add: (name, slug, callback) => {
         $.post(
             TITLEURL.fontaddurl, {
                 'name': name,
                 'slug': slug
             },
-            function(res) {
+            res => {
                 callback(res);
             }
         )
     },
-    edit: function(id, name, slug, callback) {
+    edit: (id, name, slug, callback) => {
         $.post(TITLEURL.fontediturl, {
                 'id': id,
                 'name': name,
                 'slug': slug
             },
-            function(res) {
+            res => {
                 callback(res)
             })
     },
-    del: function(id, callback) {
+    del: (id, callback) => {
         $.post(TITLEURL.fontdelurl, {
             'id': id
-        }, function(res) {
+        }, res => {
             callback(res);
         })
     }
